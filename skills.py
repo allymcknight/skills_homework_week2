@@ -1,5 +1,5 @@
 # To work on the advanced problems, set to True
-ADVANCED = False
+ADVANCED = True
 
 
 def count_unique(input_string):
@@ -134,10 +134,13 @@ def get_sum_zero_pairs(input_list):
     for num in input_list:
         for i in range(len(input_list)):
             if num + input_list[i] == 0:
-                dict[num] = input_list[i]
-    m = dict.items()
-    print m
-    return []
+                dict[i] = [num, input_list[i]]
+                input_list[i] = sum(input_list) + 1
+
+
+
+    m = dict.values()
+    return m
 
 
 def remove_duplicates(words):
@@ -307,8 +310,32 @@ def adv_get_top_letter(input_string):
     Spaces do not count as letters.
 
     """
+    mydict = {}
+    for i in range(len(input_string)):
+        if input_string[i].isalpha() == True:
+            if input_string[i] not in mydict:
+                mydict[input_string[i]] = 1
+            else:
+                mydict[input_string[i]] = mydict[input_string[i]] + 1
 
-    return ''
+    top_count = [0]
+    top_letter = "a"
+    for key in mydict:
+        if mydict.get(key) > top_count[0]:
+            top_letter = key
+            top_count[0] = mydict.get(key)
+
+    top_list = [top_letter]
+    for key in mydict:
+        if key != top_letter:
+            if mydict.get(top_letter) == mydict.get(key):
+                top_list.append(key)
+                top_list.sort()
+        else:
+            top_list = list(top_letter)
+
+
+    return top_list
 
 
 def adv_alpha_sort_by_word_length(words):
@@ -327,7 +354,6 @@ def adv_alpha_sort_by_word_length(words):
 
     """
 
-    return []
 
 
 ##############################################################################
